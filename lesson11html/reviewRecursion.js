@@ -13,10 +13,10 @@ Write your power function in this same file and you can test it by running mocha
 describe("power of negative exponent", function () {
 
     it("power(5, -3)", function () {
-        assert.ok(pow(5, -3) - 1/125 < .0001);
+        assert.ok(pow(5, -3) - 1 / 125 < .000001);
     });
     it("power(5, 3)", function () {
-        assert.strictEqual(pow(5, 3) , 125);
+        assert.strictEqual(pow(5, 3), 125);
     });
 
 });
@@ -24,10 +24,18 @@ describe("power of negative exponent", function () {
 /**
  * 
  * @param {number} number is an integer
- * @param {*} power is an integer
+ * @param {*} power is an integer maybe negative
  * @returns {number} floating point
  */
-function pow(number, power){
-//YOUR CODE HERE
-
+function pow(number, power) {
+    if (power < 0) {
+        power = power * -1;
+        number = 1 / number;
+    }
+    if (power === 0) {
+        return 1;
+    } else {
+        const result = number * pow(number, power - 1);
+        return result;
+    }
 }
